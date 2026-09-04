@@ -12,7 +12,7 @@ RUN apk update && apk add --no-cache git build-base make ca-certificates tzdata 
 RUN git clone https://github.com/fatedier/frp.git && \
     cd frp && \
     if [ -n "$DRONE_TAG" ] && [ "$DRONE_TAG" != "master" ]; then git checkout v${DRONE_TAG}; fi && \
-    cd web/frps && npm install && npm run build
+    cd web/frps && npm install && npm run build-only
 WORKDIR /go/frp
 RUN go build -trimpath -ldflags "-s -w" -tags frps -o bin/frps ./cmd/frps
 
